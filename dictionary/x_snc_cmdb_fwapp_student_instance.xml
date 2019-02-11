@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Student Instance" max_length="40" name="x_snc_cmdb_fwapp_student_instance" type="collection">
+        <element label="Email Address" max_length="40" name="email_address" type="string"/>
+        <element label="First Name" max_length="40" name="first_name" type="string"/>
+        <element label="Instance Name" max_length="40" name="instance_name" type="string"/>
+        <element label="Last Name" max_length="40" name="last_name" type="string"/>
+        <element label="URL" max_length="1024" name="url" type="url"/>
+    </element>
+</database>

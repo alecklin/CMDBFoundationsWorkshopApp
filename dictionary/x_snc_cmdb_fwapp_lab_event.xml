@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Lab Event" max_length="40" name="x_snc_cmdb_fwapp_lab_event" type="collection">
+        <element label="Instructor Instance URL" max_length="1024" name="instructor_instance_url" type="url"/>
+        <element label="Lab Template" max_length="40" name="lab_template" type="string"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+    </element>
+</database>
