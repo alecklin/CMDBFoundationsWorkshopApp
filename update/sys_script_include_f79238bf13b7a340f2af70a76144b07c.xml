@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_cmdb_fwapp.CMDBGame</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CMDBGame</name>
+        <script><![CDATA[/***** Aleck.Lin@ServiceNow  
+  var cg = new CMDBGame();
+  cg.calculateScore();
+****/
+
+var CMDBGame = Class.create();
+CMDBGame.prototype = {
+    initialize: function() {
+		
+    },
+	
+	calculateScore: function() {
+		var presenters = this._getPresenters();
+		
+		for (var i=0; i<presenters.length; i++) {
+			var presenter = presenters[i];
+			var score = this._getScoreByPresentation(presenter);
+			var score2 = this._getScoreByEnablement(presenter);
+			var score3 = this._getScoreByStroy(presenter);
+			
+			this._setScore(presenter, score+score2+score3);
+		}		
+	},
+	
+	_getPresenters: function() {
+		var presenters = [];
+		
+		var gr = new GlideAggregate("x_snc_cmdb_fwapp_m2m_lab_events");
+		gr.groupBy("user");
+		gr.query();
+		while (gr.next()) {
+			presenters.push(gr.user+'');			
+		}
+		
+		return presenters;
+	},
+	
+	_setScore: function(presenter, score) {
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_cmdb_game_score");
+		gr.addQuery("presenter", presenter);
+		gr.query();
+		if (gr.next()) {
+			gr.score = score;
+			gr.update();
+		} else {
+			gr.initialize();
+			gr.presenter = presenter;
+			gr.score = score;
+			gr.insert();
+		}						
+	},
+	
+	_getScoreByPresentation: function(presenter) {
+		var totalScore = 0;
+		
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_m2m_lab_events");
+		gr.addQuery("user", presenter);
+		gr.query();
+		while (gr.next()) {
+			var score = 0;
+			var eventType = gr.lab_event.type;
+			
+			if (eventType == "1") {
+				score = 5;
+			} else if (eventType == "2") {
+				score = 1;			
+			} else if (eventType == "3") {
+				score = 3;				
+			}
+				
+			totalScore += score;								
+		}
+		
+		return totalScore;
+	},
+	
+	_getScoreByEnablement: function(presenter) {
+		return 0;
+	},
+	
+	_getScoreByStroy: function(presenter) {
+		return 0;
+	},
+
+    type: 'CMDBGame'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-03-01 23:50:25</sys_created_on>
+        <sys_id>f79238bf13b7a340f2af70a76144b07c</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>CMDBGame</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_script_include_f79238bf13b7a340f2af70a76144b07c</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-03-02 07:17:16</sys_updated_on>
+    </sys_script_include>
+</record_update>

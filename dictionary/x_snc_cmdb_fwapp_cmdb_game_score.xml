@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="CMDB Game Score" max_length="40" name="x_snc_cmdb_fwapp_cmdb_game_score" type="collection">
+        <element label="Presenter" max_length="32" name="presenter" reference="sys_user" type="reference"/>
+        <element label="Score" max_length="40" name="score" type="integer"/>
+        <index name="index">
+            <element name="presenter"/>
+        </index>
+    </element>
+</database>
