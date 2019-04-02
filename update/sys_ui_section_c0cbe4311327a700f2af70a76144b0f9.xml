@@ -4,13 +4,13 @@
             <element>name</element>
             <position>0</position>
             <sys_created_by>aleck.lin</sys_created_by>
-            <sys_created_on>2019-02-11 07:56:26</sys_created_on>
-            <sys_id>94cbe4311327a700f2af70a76144b0ff</sys_id>
+            <sys_created_on>2019-03-18 21:43:52</sys_created_on>
+            <sys_id>c2c8fb8d13947b0002ccb9b76144b0f5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_cmdb_fwapp_lab_event" sys_domain="global" view="Default view">c0cbe4311327a700f2af70a76144b0f9</sys_ui_section>
             <sys_updated_by>aleck.lin</sys_updated_by>
-            <sys_updated_on>2019-02-11 07:56:26</sys_updated_on>
+            <sys_updated_on>2019-03-18 21:43:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>instructor_instance_url</element>
             <position>1</position>
             <sys_created_by>aleck.lin</sys_created_by>
-            <sys_created_on>2019-02-11 07:56:26</sys_created_on>
-            <sys_id>9ccbe4311327a700f2af70a76144b0ff</sys_id>
+            <sys_created_on>2019-03-18 21:43:52</sys_created_on>
+            <sys_id>8ac8fb8d13947b0002ccb9b76144b0f5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_cmdb_fwapp_lab_event" sys_domain="global" view="Default view">c0cbe4311327a700f2af70a76144b0f9</sys_ui_section>
             <sys_updated_by>aleck.lin</sys_updated_by>
-            <sys_updated_on>2019-02-11 07:56:26</sys_updated_on>
+            <sys_updated_on>2019-03-18 21:43:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -32,13 +32,13 @@
             <element>lab_template</element>
             <position>2</position>
             <sys_created_by>aleck.lin</sys_created_by>
-            <sys_created_on>2019-02-11 07:56:26</sys_created_on>
-            <sys_id>10cb28311327a700f2af70a76144b000</sys_id>
+            <sys_created_on>2019-03-18 21:43:52</sys_created_on>
+            <sys_id>0ec8fb8d13947b0002ccb9b76144b0f5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_cmdb_fwapp_lab_event" sys_domain="global" view="Default view">c0cbe4311327a700f2af70a76144b0f9</sys_ui_section>
             <sys_updated_by>aleck.lin</sys_updated_by>
-            <sys_updated_on>2019-02-11 07:56:26</sys_updated_on>
+            <sys_updated_on>2019-03-18 21:43:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -46,13 +46,27 @@
             <element>type</element>
             <position>3</position>
             <sys_created_by>aleck.lin</sys_created_by>
-            <sys_created_on>2019-03-01 23:14:23</sys_created_on>
-            <sys_id>5a7aa8f713b7a340f2af70a76144b077</sys_id>
+            <sys_created_on>2019-03-18 21:43:52</sys_created_on>
+            <sys_id>8ec8fb8d13947b0002ccb9b76144b0f5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_snc_cmdb_fwapp_lab_event" sys_domain="global" view="Default view">c0cbe4311327a700f2af70a76144b0f9</sys_ui_section>
             <sys_updated_by>aleck.lin</sys_updated_by>
-            <sys_updated_on>2019-03-01 23:14:23</sys_updated_on>
+            <sys_updated_on>2019-03-18 21:43:52</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_created_on</element>
+            <position>4</position>
+            <sys_created_by>aleck.lin</sys_created_by>
+            <sys_created_on>2019-03-18 21:43:52</sys_created_on>
+            <sys_id>02c8fb8d13947b0002ccb9b76144b0f6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_snc_cmdb_fwapp_lab_event" sys_domain="global" view="Default view">c0cbe4311327a700f2af70a76144b0f9</sys_ui_section>
+            <sys_updated_by>aleck.lin</sys_updated_by>
+            <sys_updated_on>2019-03-18 21:43:52</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

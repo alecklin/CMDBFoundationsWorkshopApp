@@ -2,12 +2,13 @@
     <element label="Lab Event" max_length="40" name="x_snc_cmdb_fwapp_lab_event" type="collection">
         <element label="Instructor Instance URL" max_length="1024" name="instructor_instance_url" type="url"/>
         <element label="Lab Template" max_length="40" name="lab_template" type="string"/>
-        <element label="Name" max_length="40" name="name" type="string"/>
+        <element label="Name" max_length="128" name="name" type="string"/>
         <element choice="1" label="Type" max_length="40" name="type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="1-on-1" value="2"/>
                 <element inactive_on_update="false" label="Ad-hoc" value="3"/>
                 <element inactive_on_update="false" label="Field Marketing" value="1"/>
+                <element inactive_on_update="false" label="Testing" value="4"/>
             </choice>
         </element>
     </element>
