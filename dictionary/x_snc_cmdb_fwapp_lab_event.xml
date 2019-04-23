@@ -5,10 +5,11 @@
         <element label="Name" max_length="128" name="name" type="string"/>
         <element choice="1" label="Type" max_length="40" name="type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="1-on-1" value="2"/>
-                <element inactive_on_update="false" label="Ad-hoc" value="3"/>
-                <element inactive_on_update="false" label="Field Marketing" value="1"/>
-                <element inactive_on_update="false" label="Testing" value="4"/>
+                <element inactive_on_update="false" label="1-on-1" sequence="0" value="2"/>
+                <element inactive_on_update="false" label="Ad-hoc" sequence="1" value="3"/>
+                <element inactive_on_update="false" label="Field Marketing" sequence="2" value="1"/>
+                <element inactive_on_update="false" label="Testing" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="Personal Practice" sequence="4" value="5"/>
             </choice>
         </element>
     </element>
