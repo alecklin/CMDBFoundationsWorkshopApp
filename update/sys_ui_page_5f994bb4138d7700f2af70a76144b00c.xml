@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[  var instanceName = gel("instance_name").value;
+
+  if(instanceName == '') {
+	  //alert("no instance Name... send to no survey page");
+	  self.location = "https://cmdb.service-now.com/x_snc_cmdb_fwapp_cmdb_no_survey.do"+"?sysparm_instance_name="+instanceName;
+  } 
+  
+  var ga = new GlideAjax('CMDBWorkshopAjax');
+  ga.addParam('sysparm_name', 'getSurveyLink');
+  ga.addParam('sysparm_instanceName', instanceName);
+  ga.getXML(processResponse);
+
+  function processResponse(response) {
+	var result = response.responseXML.documentElement.getAttribute("answer");
+	
+	if (result == "false") {
+		//alert("Could not find survey based on instance name... send to no survey page");
+		self.location = "https://cmdb.service-now.com/x_snc_cmdb_fwapp_cmdb_no_survey.do"+"?sysparm_instance_name="+instanceName;
+		return;
+	}  
+	  
+	//alert('Found result... send to the survey link');
+	self.location = result;  
+	return;
+	  
+  }  ]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_snc_cmdb_fwapp_cmdb_survey.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<input type="hidden" id="instance_name" name="instance_name" value="${sysparm_instance_name}"/>
+	<div> Preparing survey... </div>
+</j:jelly>]]></html>
+        <name>cmdb_survey</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-04-24 06:26:46</sys_created_on>
+        <sys_id>5f994bb4138d7700f2af70a76144b00c</sys_id>
+        <sys_mod_count>81</sys_mod_count>
+        <sys_name>cmdb_survey</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_ui_page_5f994bb4138d7700f2af70a76144b00c</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-04-27 07:31:34</sys_updated_on>
+    </sys_ui_page>
+</record_update>

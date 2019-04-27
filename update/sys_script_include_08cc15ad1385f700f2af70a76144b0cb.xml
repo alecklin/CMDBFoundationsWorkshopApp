@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_cmdb_fwapp.CMDBWorkshopAjax</api_name>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>CMDBWorkshopAjax</name>
+        <script><![CDATA[/* Author: Aleck.Lin@ServiceNow.com
+*/
+
+var CMDBWorkshopAjax = Class.create();
+CMDBWorkshopAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	isPublic: function () { return true;}, //Need to call this from a public page
+	
+	getSurveyLink: function() {
+		var instanceName = this.getParameter("sysparm_instanceName");
+		
+		var labEventId = this._getLabEvent(instanceName);
+
+		var labSurveyLink = this._getLabSurveyLink(labEventId);
+		
+		if (gs.nil(labSurveyLink))
+			return false;	
+		
+		return labSurveyLink;
+	},
+
+	_getLabEvent: function(instanceName){
+		var instanceNameMatch = instanceName;		
+		//If it's an instructor instance, need to massage it a bit accordingly if it's "soc-apr-462-002-instructor"
+		if (instanceName.indexOf("-instructor") > -1) {
+			if (instanceName.indexOf("001-instructor") < 0) {
+				instanceNameMatch = instanceName.substring(0, instanceName.length-(3+"-instructor".length)) + "001-instructor";						}
+			
+			var instructor_instance_url = "https://" + instanceNameMatch + ".lab.service-now.com";
+			
+			var gr = new GlideRecord("x_snc_cmdb_fwapp_lab_event");
+			gr.addQuery("instructor_instance_url", instructor_instance_url);
+			gr.orderByDesc();
+			gr.query();
+			if (gr.next())
+				return gr.sys_id+'';			
+		}
+			
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_student_instance");
+		gr.addQuery("instance_name", instanceNameMatch);
+		gr.orderByDesc();
+		gr.query();
+		if (gr.next())
+			return gr.lab_event.sys_id + '';
+		
+	},
+	
+	_getLabSurveyLink: function (labEventId) {
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_m2m_assessment_m_lab_events");
+		gr.addQuery("lab_event", labEventId);
+		gr.query();
+		if(!gr.next())
+			return ""; 
+		
+		var surveyId = gr.assessment_metric_type.sys_id + '';
+		
+		var url = gs.getProperty('glide.servlet.uri');
+		url += "assessment_take2.do?sysparm_assessable_type=" + surveyId;
+
+		return url;
+		
+	},
+	
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-04-26 06:27:47</sys_created_on>
+        <sys_id>08cc15ad1385f700f2af70a76144b0cb</sys_id>
+        <sys_mod_count>34</sys_mod_count>
+        <sys_name>CMDBWorkshopAjax</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_script_include_08cc15ad1385f700f2af70a76144b0cb</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-04-27 07:31:01</sys_updated_on>
+    </sys_script_include>
+</record_update>
