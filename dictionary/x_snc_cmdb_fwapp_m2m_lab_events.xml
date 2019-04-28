@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="x_snc_cmdb_fwapp_m2m__lab_events" max_length="40" name="x_snc_cmdb_fwapp_m2m_lab_events" type="collection">
+    <element label="M2M Lab Events and Users" max_length="40" name="x_snc_cmdb_fwapp_m2m_lab_events" type="collection">
         <element label="Lab Event" max_length="32" name="lab_event" reference="x_snc_cmdb_fwapp_lab_event" type="reference"/>
         <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
         <index name="index">
