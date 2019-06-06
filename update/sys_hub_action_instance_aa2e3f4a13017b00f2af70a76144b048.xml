@@ -5,7 +5,7 @@
         <action_type display_value="Send Email">716281160b100300d97d8bf637673ac7</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
+        <compiled_snapshot display_value="Send Email">716281160b100300d97d8bf637673ac7</compiled_snapshot>
         <display_text/>
         <flow display_value="Lab Event Notification">fb5c3bc613017b00f2af70a76144b096</flow>
         <order>2.1</order>
@@ -14,14 +14,14 @@
         <sys_created_by>aleck.lin</sys_created_by>
         <sys_created_on>2019-04-28 07:28:24</sys_created_on>
         <sys_id>aa2e3f4a13017b00f2af70a76144b048</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>24</sys_mod_count>
         <sys_name/>
         <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
         <sys_policy/>
         <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
         <sys_update_name>sys_hub_action_instance_aa2e3f4a13017b00f2af70a76144b048</sys_update_name>
-        <sys_updated_by>aleck.lin</sys_updated_by>
-        <sys_updated_on>2019-04-28 07:34:03</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2019-05-02 07:05:01</sys_updated_on>
         <ui_id>60cc9ea8-9f6f-4ef3-9f88-a11e1a25d2c4</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=aa2e3f4a13017b00f2af70a76144b048"/>
@@ -100,11 +100,11 @@
         <sys_created_by>aleck.lin</sys_created_by>
         <sys_created_on>2019-04-28 07:28:30</sys_created_on>
         <sys_id>c83e3f4a13017b00f2af70a76144b0bc</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>aleck.lin</sys_updated_by>
-        <sys_updated_on>2019-04-28 07:33:56</sys_updated_on>
+        <sys_updated_on>2019-05-01 02:10:39</sys_updated_on>
         <table>var__m_sys_hub_action_input_716281160b100300d97d8bf637673ac7</table>
-        <value>&lt;p data-tinymcerootblock=""&gt;A new CMDB Foundations Workshop lab (&lt;span class="data_pill " contenteditable="false" data-pillid="2658de9a-e13d-428b-8995-fe6be582b9bc" data-pillvalue="{{Created_1.current}}"&gt;Trigger➛Lab Event Record&lt;/span&gt;) was created with the url&amp;nbsp;&lt;span class="data_pill " contenteditable="false" data-pillid="ef024f24-010e-4ffa-adff-3e3ee513ddd4" data-pillvalue="{{Created_1.current.instructor_instance_url}}"&gt;Trigger➛Lab Event Record➛Instructor Instance URL&lt;/span&gt;. The image was based on&amp;nbsp;&amp;nbsp;&lt;span class="data_pill " contenteditable="false" data-pillid="ea14cea8-db65-45b9-a30a-f56ecef0948d" data-pillvalue="{{Created_1.current.lab_template}}"&gt;Trigger➛Lab Event Record➛Lab Template&lt;/span&gt;.&lt;/p&gt;</value>
+        <value>&lt;p data-tinymcerootblock=""&gt;A new CMDB Foundations Workshop lab (&lt;a style="background-color: #fcfcfc;" href="x_snc_cmdb_fwapp_lab_event.do?sys_id="&gt;https://cmdb.service-now.com/x_snc_cmdb_fwapp_lab_event.do?sys_id=&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillid="c9b6b7c5-398d-4897-9816-2fdb8eed2050" data-pillvalue="{{Created_1.current.sys_id}}"&gt;&lt;span class="data_pill " contenteditable="false" data-pillid="c9b6b7c5-398d-4897-9816-2fdb8eed2050" data-pillvalue="{{Created_1.current.sys_id}}"&gt;Trigger➛Lab Event Record➛Sys ID&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;)was created with the url&amp;nbsp;&lt;span class="data_pill " contenteditable="false" data-pillid="ef024f24-010e-4ffa-adff-3e3ee513ddd4" data-pillvalue="{{Created_1.current.instructor_instance_url}}"&gt;Trigger➛Lab Event Record➛Instructor Instance URL&lt;/span&gt;. The image was based on&amp;nbsp;&amp;nbsp;&lt;span class="data_pill " contenteditable="false" data-pillid="ea14cea8-db65-45b9-a30a-f56ecef0948d" data-pillvalue="{{Created_1.current.lab_template}}"&gt;Trigger➛Lab Event Record➛Lab Template&lt;/span&gt;.&lt;/p&gt;</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>ah_subject</field>

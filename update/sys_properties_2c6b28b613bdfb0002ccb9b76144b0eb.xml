@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <ignore_cache>false</ignore_cache>
+        <is_private>true</is_private>
+        <name>x_snc_cmdb_fwapp.cloudlab.password</name>
+        <read_roles>x_snc_cmdb_fwapp.lab_event_user</read_roles>
+        <suffix>cloudlab.password</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-06-06 06:50:01</sys_created_on>
+        <sys_id>2c6b28b613bdfb0002ccb9b76144b0eb</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>x_snc_cmdb_fwapp.cloudlab.password</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_properties_2c6b28b613bdfb0002ccb9b76144b0eb</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-06-06 06:55:42</sys_updated_on>
+        <type>password2</type>
+        <value>{{dflt-gpaes}}9U3hCPXHWOrlq5Sj4hSqY2XByM1yxEAJM3EEE4bulLI=</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=2c6b28b613bdfb0002ccb9b76144b0eb"/>
+</record_update>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_cmdb_fwapp.GetCloudLabInfo</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>GetCloudLabInfo</name>
+        <script><![CDATA[var GetCloudLabInfo = Class.create();
+GetCloudLabInfo.prototype = {
+    initialize: function() {
+		this.username = gs.getProperty("x_snc_cmdb_fwapp.cloudlab.username");
+		this.password = gs.getProperty("x_snc_cmdb_fwapp.cloudlab.password");
+		this.resultObj = null;
+		this.debugFlag = false;
+    },
+	
+	run: function() {				
+	},
+	
+	getLabInfoByShortName: function(shortName) {
+		var endpoint = "https://cloudlabs.service-now.com/api/now/table/u_cl_lab";				
+		var restMessage = new sn_ws.RESTMessageV2();
+		restMessage.setBasicAuth(this.username, this.password);
+		restMessage.setHttpMethod("get");
+		restMessage.setEndpoint(endpoint);
+		restMessage.setRequestHeader("Accept","application/json");
+		restMessage.setRequestHeader('Content-Type','application/json');	
+		restMessage.setQueryParameter("sysparm_query", "u_short_name="+shortName+"^ORDERBYDESCsys_created_on"); //Grab the latest one
+		
+		var response = restMessage.execute();
+		
+		if (response.getStatusCode() != 200)		
+			return false;
+		
+		var res = JSON.parse(response.getBody());
+		this.debug("Got " + res['result'].length + " responses back");
+		if (res['result'].length > 0)
+			this.resultObj = res['result'][0];
+		
+		return true;
+	},
+	
+    getResultObject: function() {
+		return this.resultObj;
+	},
+	
+	//Grab the user info on CloudLabs
+	getUserBySysId: function(userId) {			
+		var endpoint = "https://cloudlabs.service-now.com/api/now/table/sys_user";				
+		var restMessage = new sn_ws.RESTMessageV2();
+		restMessage.setBasicAuth(this.username, this.password);
+		restMessage.setHttpMethod("get");
+		restMessage.setEndpoint(endpoint);
+		restMessage.setRequestHeader("Accept","application/json");
+		restMessage.setRequestHeader('Content-Type','application/json');	
+		restMessage.setQueryParameter("sysparm_query", "sys_id="+userId); 
+		
+		var response = restMessage.execute();
+		
+		if (response.getStatusCode() != 200)		
+			return false;
+		
+		var res = JSON.parse(response.getBody());
+		if (res['result'].length > 0)
+			return res['result'][0];
+		
+		return false;		
+	},
+	
+	debug: function(msg) {
+		if (this.debugFlag)
+			gs.info("GetCloudLabInfo: " + msg);		
+	},
+	
+	setDebug: function(flag) {
+		this.debugFlag = flag;
+	},
+	
+	
+
+    type: 'GetCloudLabInfo'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-06-05 22:56:13</sys_created_on>
+        <sys_id>fdee36aa13b9fb0002ccb9b76144b0da</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>GetCloudLabInfo</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_script_include_fdee36aa13b9fb0002ccb9b76144b0da</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-06-06 23:11:26</sys_updated_on>
+    </sys_script_include>
+</record_update>

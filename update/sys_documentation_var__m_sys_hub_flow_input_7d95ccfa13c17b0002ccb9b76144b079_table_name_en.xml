@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="table_name" label="Table Name" language="en" table="var__m_sys_hub_flow_input_7d95ccfa13c17b0002ccb9b76144b079">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>table_name</element>
+            <help/>
+            <hint/>
+            <label>Table Name</label>
+            <language>en</language>
+            <name>var__m_sys_hub_flow_input_7d95ccfa13c17b0002ccb9b76144b079</name>
+            <plural/>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>system</sys_created_by>
+            <sys_created_on>2019-04-29 21:17:49</sys_created_on>
+            <sys_id>8295ccfa13c17b0002ccb9b76144b08a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Table Name</sys_name>
+            <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+            <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_7d95ccfa13c17b0002ccb9b76144b079_table_name_en</sys_update_name>
+            <sys_updated_by>system</sys_updated_by>
+            <sys_updated_on>2019-04-29 21:17:49</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

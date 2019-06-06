@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_cmdb_fwapp.LabUserPopulator</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>LabUserPopulator</name>
+        <script><![CDATA[/*  Author: Aleck.Lin@ServiceNow.com
+*   var lup = new LabUserPopulator(someLabSysId);
+	//lup.setDebug(true);
+	lup.run();
+*
+*   !!! It turns out that this doesn't work if someone already has an account on the cloudlabs table, but I have no access to that user table. I wouldn't be able to retrieve the person's email by accessing the user table. >.<
+*/
+
+
+var LabUserPopulator = Class.create();
+LabUserPopulator.prototype = {
+    initialize: function(labId) {
+		this.labId = labId; //sysid of the lab
+		this.labGr = this._getLabGR();
+		this.debugFlag = false;
+    },
+	
+	run: function() {
+		var shortName = this.labGr.short_name;		
+		if (!shortName) {
+			this.debug("The short name is not there " + shortName);
+			return;
+		}
+		
+		var gcl = new x_snc_cmdb_fwapp.GetCloudLabInfo();
+		if (this.debugFlag)
+			gcl.setDebug(this.debugFlag);
+		if (gcl.getLabInfoByShortName(shortName)) {
+		   var obj = gcl.getResultObject();
+		   if (obj != null) {
+			   this.debug("watchlist: " + obj.u_lab_watch_list);  // We get back a comma separated list... like maurizio.calabrese@servicenow.com,25e5b3d74f25b6007b32ac118110c70e
+			   this.debug("Returned lab object: " + JSON.stringify(obj));
+			   
+			   var watchlist = obj.u_lab_watch_list;
+			   if (!watchlist) {//nothing in the watchlist... 
+				   this.debug("There was nothing in the watchlist");
+				   return;
+			   }
+			   
+			   var users = watchlist.split(',');
+			   for (var i=0; i<users.length; i++) {
+				   this.debug("Adding user " + users[i]);
+				   this._addUserToLab(users[i]);	
+			   }
+		   }
+		} else {
+		   this.debug("Was not able to successfully connect to cloud lab instance!");
+		}
+
+	},
+	
+	_getLabGR: function() { 
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_lab_event");
+		gr.get(this.labId);
+		
+		return gr;
+	},
+	
+	_addUserToLab: function(user) {		
+		var email;
+		if (user.indexOf("@") > 0) { //This is an email! 
+			email = user;
+		} else {
+			//It's probably a sys_id of the userId
+			var gcl = new x_snc_cmdb_fwapp.GetCloudLabInfo();
+			if (this.debugFlag)
+				gcl.setDebug(this.debugFlag);
+			var userObj = gcl.getUserBySysId(user);
+			if (!userObj) {
+				this.debug("Unable to find the user on cloud lab");
+				return; //unable to find user
+			}
+			
+			email = userObj.email;
+		}
+
+		this.debug("The email of the user is " + email);
+		//We got an email now... let's find the user on this instance; otherwise create it.
+		var userId = this._findOrCreateUser(email);
+		this._associateUserToLab(userId);
+	},
+	
+	_findOrCreateUser: function(email) {
+		var userGr;
+		var gr = new GlideRecord("sys_user");
+		gr.addQuery("email", email);
+		gr.query();
+		if (gr.next()) {			
+			this.debug("The user already exists!");
+			return gr.sys_id + '';
+		} else {
+			this.debug("Creating a new user!");
+			gr.initialize();
+			gr.email = email;
+			gr.user_name = getUserId(email);
+			gr.name = getName(gr.user_name);
+			this.debug("The userid is " + gr.user_name + ". The name is " + gr.name);			
+			var userId = gr.insert();
+			
+			addUserToGroup(userId); // add to "CMDB Workshop Presenters"
+			
+			return userId;
+		}
+		
+		function getUserId(email) {
+			var patt = /(.+?)@/;
+			var res = patt.exec(email);
+			return res[1];			
+		}
+		
+		function getName(user_id) {
+			if (user_id.indexOf(".") > 0) {
+				var groups = user_id.split(".");
+				var firstName = groups[0];
+				var lastName = groups[1];
+				
+				return capitalize(firstName) + " " + capitalize(lastName);
+			}
+							
+			return user_id;				
+		}
+		
+		function capitalize(s){
+			if (typeof s !== 'string') return '';
+			return s.charAt(0).toUpperCase() + s.slice(1);
+		}
+		
+		function addUserToGroup(userId) { 
+			var gr = new GlideRecord("sys_user_group");
+			if (!gr.get("5d2637f5139d7340f2af70a76144b06f"))
+				if (!gr.get("name", "CMDB Workshop Presenters")) {
+					this.debug("Unable to find the CMDB Workshop Presenters user group");
+					return;
+				}
+			
+			var grm = new GlideRecord("sys_user_grmember");
+			grm.user = userId;
+			grm.group = gr.sys_id;
+			grm.insert();
+		}
+	},
+	
+	_associateUserToLab: function(user) { 
+		var gr = new GlideRecord("x_snc_cmdb_fwapp_m2m_lab_events");
+		gr.addQuery("lab_event", this.labId);
+		gr.addQuery("user", user);
+		gr.query();
+		if (gr.next()) {
+			this.debug("User " + user + " is already associated with the lab event " + this.labId);
+			return;
+		}
+		
+		this.debug("Associate " + user + " with the lab event " + this.labId);
+		gr.initialize();
+		gr.lab_event = this.labId;
+		gr.user = user;
+		gr.insert();
+	},
+
+	debug: function(msg) {
+		if (this.debugFlag)
+			gs.info("LabUserPopulator: " + msg);		
+	},
+	
+	setDebug: function(flag) {
+		this.debugFlag = flag;
+	},
+
+    type: 'LabUserPopulator'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>aleck.lin</sys_created_by>
+        <sys_created_on>2019-06-06 08:06:13</sys_created_on>
+        <sys_id>ef0de43a13bdfb0002ccb9b76144b0f8</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>LabUserPopulator</sys_name>
+        <sys_package display_value="CMDB Foundations Workshop App" source="x_snc_cmdb_fwapp">e3b9fee11323a700f2af70a76144b0b1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CMDB Foundations Workshop App">e3b9fee11323a700f2af70a76144b0b1</sys_scope>
+        <sys_update_name>sys_script_include_ef0de43a13bdfb0002ccb9b76144b0f8</sys_update_name>
+        <sys_updated_by>aleck.lin</sys_updated_by>
+        <sys_updated_on>2019-06-06 23:50:46</sys_updated_on>
+    </sys_script_include>
+</record_update>
